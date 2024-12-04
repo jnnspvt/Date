@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Join Me for Coffee?</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .container {
+            background: #fff;
+            border-radius: 10px;
+            padding: 20px 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button#yes {
+            background: #ff6f61;
+            color: white;
+        }
+        button#yes:hover {
+            background: #e55c50;
+        }
+        button#no {
+            background: #ccc;
+            color: #333;
+        }
+        button#no:hover {
+            background: #b3b3b3;
+        }
+        .hidden {
+            display: none;
+        }
+        .date-time-picker input {
+            margin: 10px 0;
+            padding: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hi Marineth, would you like to join me for coffee?</h1>
+        <div id="buttons">
+            <button id="yes">Yes</button>
+            <button id="no">No</button>
+        </div>
+        <div id="date-time-picker" class="hidden">
+            <h2>When are you free?</h2>
+            <input type="date" id="date">
+            <input type="time" id="time">
+            <button id="confirm">Confirm</button>
+        </div>
+        <div id="confirmation" class="hidden">
+            <h2>Thank you, Marineth!</h2>
+            <p>See you on <span id="chosen-date"></span> at <span id="chosen-time"></span>!</p>
+        </div>
+        <div id="rejection" class="hidden">
+            <h2>That's okay!</h2>
+            <p>Maybe another time, Marineth. :)</p>
+        </div>
+    </div>
+    <script>
+        const yesButton = document.getElementById('yes');
+        const noButton = document.getElementById('no');
+        const datePicker = document.getElementById('date-time-picker');
+        const confirmation = document.getElementById('confirmation');
+        const rejection = document.getElementById('rejection');
+        const chosenDate = document.getElementById('chosen-date');
+        const chosenTime = document.getElementById('chosen-time');
+        const confirmButton = document.getElementById('confirm');
+
+        yesButton.addEventListener('click', () => {
+            document.getElementById('buttons').classList.add('hidden');
+            datePicker.classList.remove('hidden');
+        });
+
+        noButton.addEventListener('click', () => {
+            document.getElementById('buttons').classList.add('hidden');
+            rejection.classList.remove('hidden');
+        });
+
+        confirmButton.addEventListener('click', () => {
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+
+            if (date && time) {
+                chosenDate.textContent = date;
+                chosenTime.textContent = time;
+                datePicker.classList.add('hidden');
+                confirmation.classList.remove('hidden');
+            } else {
+                alert('Please select both a date and time!');
+            }
+        });
+    </script>
+</body>
+</html>
